@@ -1,0 +1,18 @@
+version: '3'
+services:
+  "flutter-devenv":
+    # 1: 環境をビルドする際に利用する Dockerfile を指定
+    build:
+      context: .
+      dockerfile: flutter/Dockerfile
+    stdin_open: true
+    tty: true # コンテナの永続化
+
+    # 2: Container にマウントしたいファイルを指定
+    volumes:
+      # (Optional) VSCode settings
+      - ../:/workspace/:cached
+      # - ../flutter_app:/workspace/flutter_app # マウントディレクトリ
+    # 3: 環境変数の定義ファイルを指定
+    env_file:
+      - flutter/.flutter.env
